@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="
+  <%= temp <= 10 
+      ? 'bg-blue-600' 
+      : temp <= 25 
+        ? 'bg-yellow-400' 
+        : 'bg-red-600' %>
+  min-h-screen flex flex-col justify-center items-center text-white text-center p-6
+">
+
+  <% if (error) { %>
+    <h2 class="text-2xl font-bold mb-4"><%= error %></h2>
+    <a href="/" class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">🔙 Back</a>
+  <% } else { %>
+    <h2 class="text-3xl font-bold mb-2">🌍 Weather in <%= city %>, <%= country %></h2>
+    <h3 class="text-2xl font-semibold mb-4">🌡️ <%= temp %>°C</h3>
+    <p class="text-lg mb-2">☁️ <%= description %></p>
+    <p class="text-lg mb-2">💧 Humidity: <%= humidity %>%</p>
+    <p class="text-lg mb-4">💨 Wind: <%= wind %> m/s</p>
+    <a href="/" class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">Search another place</a>
+  <% } %>
+
+</body>
+</html>
+
+
