@@ -1,15 +1,15 @@
-require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
 
+// Middlewares
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views')); // fix path
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
   res.render('index');
@@ -31,15 +31,14 @@ app.post('/weather', async (req, res) => {
       temp: data.main.temp,
       description: data.weather[0].description,
       humidity: data.main.humidity,
-      wind: data.wind.speed,
-      error: null   // 👈 Always include error
+      wind: data.wind.speed
     });
 
-  } catch (err) {
+  } catch (error) {
     res.render('result', { error: "City not found! Try again." });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🌍 Server running at http://localhost:${PORT}`);
-});
+// Export app for Vercel
+module.exports = app;
+
